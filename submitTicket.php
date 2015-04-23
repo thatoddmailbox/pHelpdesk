@@ -10,12 +10,20 @@
 		<textarea class="tinymce-activate" name="ticketDesc"></textarea>
 		<p>Describe the problem you need support for. <strong>Be detailed!</strong></p>
 
-		<h4>Attachments</h4>
+		<h4>Images</h4>
+		<p>Upload screenshots or other images describing the problem you're experiencing.</p>
+		<div class="dropzone dropzone-activate" data-action="<?php echo SITE_URL; ?>uploadHandler.php">
+			
+		</div>
+
+		<br />
+
+		<input type="email" class="form-control" placeholder="Email address" />
+		<p>A valid email address is required. Replies to this ticket will be sent here.</p>
+
+		<br />
+
+		<input type="submit" name="submit" value="Submit ticket" class="btn btn-primary btn-lg" />
 	</form>
-		<form action="<?php echo SITE_URL; ?>uploadHandler.php" class="dropzone">
-			<div class="fallback">
-				<input name="file" type="file" multiple />
-			</div>
-		</form>
 </div>
 <?php require("footer.inc.php"); ?>

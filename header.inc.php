@@ -26,6 +26,11 @@
 					tools : {title : "Tools" , items : 'spellchecker code'}
 				}
 			});
+			$(document).ready(function() {
+				$(".dropzone-activate").each(function() {
+					$(this).dropzone({ url: $(this).attr("data-action") });
+				});
+			});
 		</script>
 
 		<style>
