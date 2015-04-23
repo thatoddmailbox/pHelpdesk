@@ -21,9 +21,6 @@
 </div>
 
 <style>
-html body {
-	padding-top: 50px;
-}
 .submitTicket {
 	text-align: right;
 }

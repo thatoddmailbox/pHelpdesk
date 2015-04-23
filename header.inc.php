@@ -9,13 +9,28 @@
 		<title><?php echo htmlentities(SITE_NAME); ?></title>
 
 		<link rel="stylesheet" href="<?php echo SITE_URL; ?>css/bootstrap.min.css" />
+		<link rel="stylesheet" href="<?php echo SITE_URL; ?>css/dropzone.css" />
 
 		<script src="<?php echo SITE_URL; ?>js/jquery-1.11.2.min.js"></script>
 		<script src="<?php echo SITE_URL; ?>js/bootstrap.min.js"></script>
+		<script src="<?php echo SITE_URL; ?>js/tinymce/tinymce.min.js"></script>
+		<script src="<?php echo SITE_URL; ?>js/dropzone.js"></script>
+		<script>
+			tinymce.init({
+				selector: ".tinymce-activate",
+				menu : {
+					edit  : {title : "Edit"  , items : 'undo redo | selectall'},
+					insert: {title : "Insert", items : 'link media | template hr'},
+					format: {title : "Format", items : 'bold italic underline strikethrough superscript subscript | formats | removeformat'},
+					table : {title : "Table" , items : 'inserttable tableprops deletetable | cell row column'},
+					tools : {title : "Tools" , items : 'spellchecker code'}
+				}
+			});
+		</script>
 
 		<style>
 		body {
-			padding-top: 70px;
+			padding-top: 50px;
 		}
 		footer {
 			text-align: center;
