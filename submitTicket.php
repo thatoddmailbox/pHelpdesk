@@ -11,11 +11,11 @@
 		<p>Describe the problem you need support for. <strong>Be detailed!</strong></p>
 
 		<h4>Attachments</h4>
+	</form>
 		<form action="<?php echo SITE_URL; ?>uploadHandler.php" class="dropzone">
 			<div class="fallback">
 				<input name="file" type="file" multiple />
 			</div>
 		</form>
-	</form>
 </div>
 <?php require("footer.inc.php"); ?>
