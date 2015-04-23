@@ -2,6 +2,8 @@
 	require_once("config.inc.php");
 
 	session_start();
+	
+	require_once("util.inc.php");
 ?>
 <!DOCTYPE html>
 <html>
