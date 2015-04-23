@@ -8,10 +8,10 @@
 	<head>
 		<title><?php echo htmlentities(SITE_NAME); ?></title>
 
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="<?php echo SITE_URL; ?>css/bootstrap.min.css" />
 
-		<script src="js/jquery-1.11.2.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<script src="<?php echo SITE_URL; ?>js/jquery-1.11.2.min.js"></script>
+		<script src="<?php echo SITE_URL; ?>js/bootstrap.min.js"></script>
 
 		<style>
 		body {
@@ -29,12 +29,12 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#"><?php echo htmlentities(SITE_NAME); ?></a>
+					<a class="navbar-brand" href="<?php echo SITE_URL; ?>"><?php echo htmlentities(SITE_NAME); ?></a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="nav-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+						<li><a href="#">Link</a></li>
 						<li><a href="#">Link</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
