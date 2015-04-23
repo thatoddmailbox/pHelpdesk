@@ -17,6 +17,9 @@
 		body {
 			padding-top: 70px;
 		}
+		footer {
+			text-align: center;
+		}
 		</style>
 	</head>
 	<body>
