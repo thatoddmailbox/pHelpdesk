@@ -4,22 +4,22 @@
 	$error = "";
 
 	if (isset($_POST["submit"])) {
-		if (isNotEmpty($_POST["ticketName"])) {
+		if (isPostValEmpty("ticketName")) {
 			$isError = true;
 			$error .= "Please enter a ticket name.<br />";
 		}
-		if (isNotEmpty($_POST["ticketDesc"])) {
+		if (isPostValEmpty("ticketDesc")) {
 			$isError = true;
 			$error .= "Please enter a ticket description.<br />";
 		}
-		if (isNotEmpty($_POST["email"]) || !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+		if (isPostValEmpty("email") || !filter_var(postVal("email"), FILTER_VALIDATE_EMAIL)) {
 			$isError = true;
 			$error .= "Please enter a valid email address.<br />";
 		}
 
-		$name = $_POST["ticketName"];
-		$desc = $_POST["ticketDesc"];
-		$email = $_POST["email"];
+		$name = postVal("ticketName");
+		$desc = postVal("ticketDesc");
+		$email = postVal("email");
 		$attachments = "";
 
 		$stmt = $db->prepare("INSERT INTO `pHelpdesk`.`" . DB_PREF . "tickets` (`ticketName`, `ticketDesc`, `ticketEmail`, `ticketAttachments`) VALUES (:ticketName, :ticketDesc, :ticketEmail, :ticketAttachments)");
