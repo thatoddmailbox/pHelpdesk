@@ -36,4 +36,6 @@ function postVal($key)
 	return $value;
 }
 
+$hasher = new PasswordHash(SITE_HASH_COST, SITE_HASH_PORTABLE);
+
 require_once("mail.inc.php");
