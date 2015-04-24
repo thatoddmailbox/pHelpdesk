@@ -12,7 +12,7 @@
 			$isError = true;
 			$error .= "Please enter a ticket description.<br />";
 		}
-		if (isNotEmpty($_POST["email"])) {
+		if (isNotEmpty($_POST["email"]) || !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
 			$isError = true;
 			$error .= "Please enter a valid email address.<br />";
 		}
