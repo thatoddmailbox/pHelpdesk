@@ -22,6 +22,15 @@
 		$email = postVal("email");
 		$attachments = "";
 
+		if (strlen($name) > 255) {
+			$isError = true;
+			$error .= "Ticket name too long!<br />";
+		}
+		if (strlen($email) > 255) {
+			$isError = true;
+			$error .= "Email too long!<br />";
+		}
+
 		$stmt = $db->prepare("INSERT INTO `pHelpdesk`.`" . DB_PREF . "tickets` (`ticketName`, `ticketDesc`, `ticketEmail`, `ticketAttachments`) VALUES (:ticketName, :ticketDesc, :ticketEmail, :ticketAttachments)");
 		$stmt->execute(array(':ticketName' => $name, ':ticketDesc' => $desc, ':ticketEmail' => $email, ':ticketAttachments' => $attachments));
 
@@ -41,7 +50,7 @@
 	<form action="<?php echo SITE_URL; ?>submitTicket.php" method="POST">
 		<br />
 		<p>Give your ticket a name. We recommend keeping it a short description of the problem you're experiencing.</p>
-		<input type="textbox" class="form-control" name="ticketName" placeholder="Ticket name" />
+		<input type="textbox" class="form-control" name="ticketName" placeholder="Ticket name" maxlength="255" />
 		<br />
 
 		<p>Describe the problem you need support for. <strong>Be detailed!</strong></p>
@@ -56,7 +65,7 @@
 
 		<br />
 
-		<input type="email" class="form-control" name="email" placeholder="Email address" />
+		<input type="email" class="form-control" name="email" placeholder="Email address" maxlength="255" />
 		<p>A valid email address is required. Replies to this ticket will be sent here.</p>
 
 		<br />
