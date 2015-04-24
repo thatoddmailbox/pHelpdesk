@@ -11,3 +11,5 @@ function redirect($url) {
 	echo htmlspecialchars($url);
 	echo "\">click here</a>";
 }
+
+require_once("mail.inc.php");
