@@ -16,6 +16,17 @@
 			$isError = true;
 			$error .= "Please enter a valid email address.<br />";
 		}
+
+		$name = $_POST["ticketName"];
+		$desc = $_POST["ticketDesc"];
+		$email = $_POST["email"];
+		$attachments = "";
+
+		$stmt = $db->prepare("INSERT INTO `pHelpdesk`.`" . DB_PREF . "tickets` (`ticketName`, `ticketDesc`, `ticketEmail`, `ticketAttachments`) VALUES (:ticketName, :ticketDesc, :ticketEmail, :ticketAttachments)");
+		$stmt->execute(array(':ticketName' => $name, ':ticketDesc' => $desc, ':ticketEmail' => $email, ':ticketAttachments' => $attachments));
+
+		redirect("ticketSuccess.php?number=" . $db->lastInsertId());
+		die();
 	}
 ?>
 <div class="container">
