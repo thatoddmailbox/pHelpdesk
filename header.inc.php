@@ -85,7 +85,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 								<?php if ($_SESSION["loggedIn"]) {
-									echo htmlentities($_SESSION["name"]);
+									echo htmlentities($currentUserRecord["accountName"]);
 								} else { ?>
 									Log in/create account
 								<?php } ?>

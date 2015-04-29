@@ -70,6 +70,11 @@ function getUserRecord($username) {
 	return $results[0];
 }
 
+$currentUserRecord = array();
+if ($_SESSION["loggedIn"]) {
+	$currentUserRecord = getUserRecord($_SESSION["username"]);
+}
+
 require_once("include/PasswordHash.php");
 $hasher = new PasswordHash(SITE_HASH_COST, SITE_HASH_PORTABLE);
 
