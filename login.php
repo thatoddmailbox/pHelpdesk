@@ -1,17 +1,5 @@
 <?php require("header.inc.php"); ?>
 <?php
-	$isError = false;
-	$error = "";
-
-	function form_error($errMsg) {
-		global $isError;
-		global $error;
-		
-		$isError = true;
-		$error .= $errMsg;
-		$error .= "<br />";
-	}
-	
 	if (isset($_POST["submit"])) {
 		if (isPostValEmpty("username")) {
 			form_error("Please enter a username.");
@@ -50,11 +38,7 @@
 ?>
 <div class="container">
 	<h1>Log in</h1>
-	<?php if ($isError) { ?>
-		<div class="alert alert-danger" role="alert">
-			<strong>Error!</strong> <br /> <?php echo $error; ?>
-		</div>
-	<?php } ?>
+	<?php form_output_errors(); ?>
 	<form action="<?php echo SITE_URL; ?>login.php" method="POST">
 		<input type="text" class="form-control" name="username" placeholder="Username (not your full name)" maxlength="255" />
 		<input type="password" class="form-control" name="pwd" placeholder="Password" maxlength="72" />

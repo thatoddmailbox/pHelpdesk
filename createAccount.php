@@ -1,14 +1,5 @@
 <?php require("header.inc.php"); ?>
 <?php
-	$isError = false;
-	$error = "";
-
-	function form_error($errMsg) {
-		$isError = true;
-		$error .= $errMsg;
-		$error .= "<br />";
-	}
-
 	if (isset($_POST["submit"])) {
 		if (isPostValEmpty("name")) {
 			form_error("Please enter a name.");
@@ -84,11 +75,7 @@
 ?>
 <div class="container">
 	<h1>Create an account</h1>
-	<?php if ($isError) { ?>
-		<div class="alert alert-danger" role="alert">
-			<strong>Error!</strong> <br /> <?php echo $error; ?>
-		</div>
-	<?php } ?>
+	<?php form_output_errors(); ?>
 	<form action="<?php echo SITE_URL; ?>createAccount.php" method="POST">
 		<input type="text" class="form-control" name="name" placeholder="Name" maxlength="255" />
 		<input type="text" class="form-control" name="username" placeholder="Username" maxlength="255" />

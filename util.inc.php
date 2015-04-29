@@ -36,6 +36,29 @@ function postVal($key)
 	return $value;
 }
 
+$isError = false;
+$error = "";
+
+function form_error($errMsg) {
+	global $isError;
+	global $error;
+
+	$isError = true;
+	$error .= $errMsg;
+	$error .= "<br />";
+}
+function form_output_errors() {
+	global $isError;
+	global $error;
+
+	if ($isError) {
+		echo '<div class="alert alert-danger" role="alert">';
+		echo '<strong>Error!</strong> <br />';
+		echo $error;
+		echo '</div>';
+	}
+}
+
 function getUserRecord($username) {
 	global $db;
 	$chkStmt = $db->prepare("SELECT * FROM `" . DB_PREF . "accounts` WHERE accountUsername=:username");

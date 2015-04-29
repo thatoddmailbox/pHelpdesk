@@ -1,14 +1,5 @@
 <?php require("header.inc.php"); ?>
 <?php
-	$isError = false;
-	$error = "";
-
-	function form_error($errMsg) {
-		$isError = true;
-		$error .= $errMsg;
-		$error .= "<br />";
-	}
-
 	if (isset($_POST["submit"])) {
 		if (isPostValEmpty("ticketName")) {
 			form_error("Please enter a ticket name.");
@@ -43,11 +34,7 @@
 ?>
 <div class="container">
 	<h1>Submit a ticket</h1>
-	<?php if ($isError) { ?>
-		<div class="alert alert-danger" role="alert">
-			<strong>Error!</strong> <br /> <?php echo $error; ?>
-		</div>
-	<?php } ?>
+	<?php form_output_errors(); ?>
 	<p>You can use this form to submit a support ticket! A member of our staff will assist you.</p>
 	<?php if (!$_SESSION["loggedIn"]) { ?>
 		<p>If you'd like, you can also <a href="<?php echo SITE_URL; ?>register.php">create an account</a> or <a href="<?php echo SITE_URL; ?>login.php">log in</a>. An account allows you to manage tickets and view replies.</p>
