@@ -36,6 +36,17 @@ function postVal($key)
 	return $value;
 }
 
+function getUserRecord($username) {
+	global $db;
+	$chkStmt = $db->prepare("SELECT * FROM `" . DB_PREF . "accounts` WHERE accountUsername=:username");
+	$chkStmt->execute(array(":username" => $username));
+	$results = $chkStmt->fetchAll(PDO::FETCH_ASSOC);
+	if (count($results) == 0) {
+		return array();
+	}
+	return $results[0];
+}
+
 require_once("include/PasswordHash.php");
 $hasher = new PasswordHash(SITE_HASH_COST, SITE_HASH_PORTABLE);
 

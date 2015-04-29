@@ -49,9 +49,10 @@
 		</div>
 	<?php } ?>
 	<p>You can use this form to submit a support ticket! A member of our staff will assist you.</p>
-	<p>If you'd like, you can also <a href="<?php echo SITE_URL; ?>register.php">create an account</a> or <a href="<?php echo SITE_URL; ?>login.php">log in</a>. An account allows you to manage tickets and view replies.</p>
+	<?php if (!$_SESSION["loggedIn"]) { ?>
+		<p>If you'd like, you can also <a href="<?php echo SITE_URL; ?>register.php">create an account</a> or <a href="<?php echo SITE_URL; ?>login.php">log in</a>. An account allows you to manage tickets and view replies.</p>
+	<?php } ?>
 	<form action="<?php echo SITE_URL; ?>submitTicket.php" method="POST">
-		<br />
 		<p>Give your ticket a name. We recommend keeping it a short description of the problem you're experiencing.</p>
 		<input type="textbox" class="form-control" name="ticketName" placeholder="Ticket name" maxlength="255" />
 		<br />
@@ -68,9 +69,15 @@
 
 		<br />
 
-		<input type="email" class="form-control" name="email" placeholder="Email address" maxlength="255" />
-		<p>A valid email address is required. Replies to this ticket will be sent here.</p>
+		<?php if ($_SESSION["loggedIn"]) { ?>
+			<p>You're logged in, and emails will be sent to the email address on this account, <strong><?php echo htmlentities(getUserRecord($_SESSION["username"])["accountEmail"]); ?></strong>.</p>
+			<p>To change this email, <a href="<?php echo SITE_URL; ?>profile.php">visit the profile page</a>.
+		<?php } else { ?>
+			<input type="email" class="form-control" name="email" placeholder="Email address" maxlength="255" />
+			<p>A valid email address is required. Replies to this ticket will be sent here.</p>
+		<?php } ?>
 
+		<br />
 		<br />
 
 		<input type="submit" name="submit" value="Submit ticket" class="btn btn-primary btn-lg" />
