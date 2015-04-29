@@ -1,7 +1,7 @@
 <?php require("../header.inc.php"); ?>
 <?php require("../requireLogin.inc.php"); ?>
 <div class="container">
-	<h1>Administration panel</h1>
+	<h1>User management</h1>
 	<p>Select an option:</p>
 	<ul>
 		<li><a href="<?php echo SITE_URL; ?>admin/users.php">User management</a></li>

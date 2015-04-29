@@ -5,6 +5,15 @@
 	session_start();
 	
 	require_once("util.inc.php");
+
+	$currentLevel = "user";
+
+	if (strpos($_SERVER["PHP_SELF"], "/agent/") !== FALSE) {
+		$currentLevel = "agent";
+	}
+	if (strpos($_SERVER["PHP_SELF"], "/admin/") !== FALSE) {
+		$currentLevel = "admin";
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +55,7 @@
 		</style>
 	</head>
 	<body>
-		<nav class="navbar navbar-default navbar-fixed-top">
+		<nav class="navbar navbar-default navbar-fixed-top <?php if ($currentLevel != "user") { echo "navbar-inverse"; } ?>">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
@@ -89,10 +98,13 @@
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu" role="menu">
-									<?php if ($currentUserRecord["accountLevel"] == "admin" || $currentUserRecord["accountLevel"] == "agent") { ?>
+									<?php if ($currentLevel != "user") { ?>
+										<li><a href="<?php echo SITE_URL; ?>">User view</a></li>
+									<?php } ?>
+									<?php if ($currentLevel != "agent" && ($currentUserRecord["accountLevel"] == "admin" || $currentUserRecord["accountLevel"] == "agent")) { ?>
 										<li><a href="<?php echo SITE_URL; ?>agent/">Agent view</a></li>
 									<?php } ?>
-									<?php if ($currentUserRecord["accountLevel"] == "admin") { ?>
+									<?php if ($currentLevel != "admin" && ($currentUserRecord["accountLevel"] == "admin")) { ?>
 										<li><a href="<?php echo SITE_URL; ?>admin/">Admin view</a></li>
 									<?php } ?>
 								</ul>
