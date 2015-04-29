@@ -66,7 +66,6 @@
 				$insStmt->execute(array(':name' => $name, ':username' => $username, ':email' => $email, ':pass' => $password));
 				$affected_rows = $insStmt->rowCount();
 				$_SESSION["loggedIn"] = true;
-				$_SESSION["name"] = $name;
 				$_SESSION["username"] = $username;
 				redirect(SITE_URL . "welcome.php");
 			}

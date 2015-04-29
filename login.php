@@ -28,7 +28,6 @@
 					form_error("The username or password is incorrect.");
 				} else {
 					$_SESSION["loggedIn"] = true;
-					$_SESSION["name"] = $results[0]["accountName"];
 					$_SESSION["username"] = $results[0]["accountUsername"];
 					redirect(SITE_URL . "index.php");
 				}

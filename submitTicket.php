@@ -57,7 +57,7 @@
 		<br />
 
 		<?php if ($_SESSION["loggedIn"]) { ?>
-			<p>You're logged in, and emails will be sent to the email address on this account, <strong><?php echo htmlentities(getUserRecord($_SESSION["username"])["accountEmail"]); ?></strong>.</p>
+			<p>You're logged in, and emails will be sent to the email address on this account, <strong><?php echo htmlentities($currentUserRecord["accountEmail"]); ?></strong>.</p>
 			<p>To change this email, <a href="<?php echo SITE_URL; ?>profile.php">visit the profile page</a>.
 		<?php } else { ?>
 			<input type="email" class="form-control" name="email" placeholder="Email address" maxlength="255" />

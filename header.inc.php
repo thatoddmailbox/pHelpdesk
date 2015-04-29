@@ -82,6 +82,22 @@
 						<button type="submit" class="btn btn-default">Submit</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
+						<?php if ($_SESSION["loggedIn"] && $currentUserRecord["accountLevel"] != "user") { ?>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+									Switch view
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu" role="menu">
+									<?php if ($currentUserRecord["accountLevel"] == "admin" || $currentUserRecord["accountLevel"] == "agent") { ?>
+										<li><a href="<?php echo SITE_URL; ?>agent/">Agent view</a></li>
+									<?php } ?>
+									<?php if ($currentUserRecord["accountLevel"] == "admin") { ?>
+										<li><a href="<?php echo SITE_URL; ?>admin/">Admin view</a></li>
+									<?php } ?>
+								</ul>
+							</li>
+						<?php } ?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 								<?php if ($_SESSION["loggedIn"]) {
