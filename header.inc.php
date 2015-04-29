@@ -83,13 +83,24 @@
 					</form>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Guest User <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+								<?php if ($_SESSION["loggedIn"]) {
+									echo htmlentities($_SESSION["name"]);
+								} else { ?>
+									Log in/create account
+								<?php } ?>
+								<span class="caret"></span>
+							</a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
+								<?php if ($_SESSION["loggedIn"]) { ?>
+									<li><a href="<?php echo SITE_URL; ?>profile.php">Profile</a></li>
+									<li><a href="<?php echo SITE_URL; ?>myTickets.php">My tickets</a></li>
+									<li class="divider"></li>
+									<li><a href="<?php echo SITE_URL; ?>logout.php">Log out</a></li>
+								<?php } else { ?>
+									<li><a href="<?php echo SITE_URL; ?>createAccount.php">Create account</a></li>
+									<li><a href="<?php echo SITE_URL; ?>login.php">Log in</a></li>
+								<?php } ?>
 							</ul>
 						</li>
 					</ul>

@@ -13,10 +13,10 @@ function isEmpty($formField) {
 	return !isset($formField) || empty($formField);
 }
 function isGetValEmpty($key) {
-	return isNotEmpty($_GET[$key]);
+	return isEmpty($_GET[$key]);
 }
 function isPostValEmpty($key) {
-	return isNotEmpty($_POST[$key]);
+	return isEmpty($_POST[$key]);
 }
 
 function getVal($key)
@@ -36,6 +36,7 @@ function postVal($key)
 	return $value;
 }
 
+require_once("include/PasswordHash.php");
 $hasher = new PasswordHash(SITE_HASH_COST, SITE_HASH_PORTABLE);
 
 require_once("mail.inc.php");

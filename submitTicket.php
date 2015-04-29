@@ -3,18 +3,21 @@
 	$isError = false;
 	$error = "";
 
+	function form_error($errMsg) {
+		$isError = true;
+		$error .= $errMsg;
+		$error .= "<br />";
+	}
+
 	if (isset($_POST["submit"])) {
 		if (isPostValEmpty("ticketName")) {
-			$isError = true;
-			$error .= "Please enter a ticket name.<br />";
+			form_error("Please enter a ticket name.");
 		}
 		if (isPostValEmpty("ticketDesc")) {
-			$isError = true;
-			$error .= "Please enter a ticket description.<br />";
+			form_error("Please enter a ticket description.");
 		}
 		if (isPostValEmpty("email") || !filter_var(postVal("email"), FILTER_VALIDATE_EMAIL)) {
-			$isError = true;
-			$error .= "Please enter a valid email address.<br />";
+			form_error("Please enter a valid email address.");
 		}
 
 		$name = postVal("ticketName");
@@ -23,19 +26,19 @@
 		$attachments = "";
 
 		if (strlen($name) > 255) {
-			$isError = true;
-			$error .= "Ticket name too long!<br />";
+			form_error("Ticket name too long!");
 		}
 		if (strlen($email) > 255) {
-			$isError = true;
-			$error .= "Email too long!<br />";
+			form_error("Email too long!");
 		}
 
-		$stmt = $db->prepare("INSERT INTO `pHelpdesk`.`" . DB_PREF . "tickets` (`ticketName`, `ticketDesc`, `ticketEmail`, `ticketAttachments`) VALUES (:ticketName, :ticketDesc, :ticketEmail, :ticketAttachments)");
-		$stmt->execute(array(':ticketName' => $name, ':ticketDesc' => $desc, ':ticketEmail' => $email, ':ticketAttachments' => $attachments));
+		if (!$isError) {
+			$stmt = $db->prepare("INSERT INTO `" . DB_PREF . "tickets` (`ticketName`, `ticketDesc`, `ticketEmail`, `ticketAttachments`) VALUES (:ticketName, :ticketDesc, :ticketEmail, :ticketAttachments)");
+			$stmt->execute(array(':ticketName' => $name, ':ticketDesc' => $desc, ':ticketEmail' => $email, ':ticketAttachments' => $attachments));
 
-		redirect("ticketSuccess.php?number=" . $db->lastInsertId());
-		die();
+			redirect("ticketSuccess.php?number=" . $db->lastInsertId());
+			die();
+		}
 	}
 ?>
 <div class="container">
