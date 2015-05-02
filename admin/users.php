@@ -43,7 +43,9 @@
 					echo "</td>";
 
 					echo "<td>";
-					echo "asdf";
+					echo '<a href="' . SITE_URL . 'admin/editUser.php?id=' . $entry["accountId"] . '" class="btn btn-primary btn-xs">Edit</a>';
+					echo ' ';
+					echo '<a href="' . SITE_URL . 'admin/deleteUser.php?id=' . $entry["accountId"] . '" class="btn btn-danger btn-xs">Delete</a>';
 					echo "</td>";
 
 					echo "</tr>";

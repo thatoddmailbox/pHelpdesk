@@ -36,6 +36,10 @@ function postVal($key)
 	return $value;
 }
 
+function friendlyErrorMsg($desc) {
+	die($desc); // TODO: make friendlier
+}
+
 $isError = false;
 $error = "";
 
@@ -63,6 +67,16 @@ function getUserRecord($username) {
 	global $db;
 	$chkStmt = $db->prepare("SELECT * FROM `" . DB_PREF . "accounts` WHERE accountUsername=:username");
 	$chkStmt->execute(array(":username" => $username));
+	$results = $chkStmt->fetchAll(PDO::FETCH_ASSOC);
+	if (count($results) == 0) {
+		return array();
+	}
+	return $results[0];
+}
+function getUserRecordFromId($id) {
+	global $db;
+	$chkStmt = $db->prepare("SELECT * FROM `" . DB_PREF . "accounts` WHERE accountId=:id");
+	$chkStmt->execute(array(":id" => $id));
 	$results = $chkStmt->fetchAll(PDO::FETCH_ASSOC);
 	if (count($results) == 0) {
 		return array();
