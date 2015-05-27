@@ -7,7 +7,7 @@
 		if (isPostValEmpty("ticketDesc")) {
 			form_error("Please enter a ticket description.");
 		}
-		if (isPostValEmpty("email") || !filter_var(postVal("email"), FILTER_VALIDATE_EMAIL)) {
+		if ((isPostValEmpty("email") || !filter_var(postVal("email"), FILTER_VALIDATE_EMAIL)) && !$_SESSION["loggedIn"]) {
 			form_error("Please enter a valid email address.");
 		}
 
@@ -15,6 +15,10 @@
 		$desc = postVal("ticketDesc");
 		$email = postVal("email");
 		$attachments = "";
+
+		if (!$isError && $_SESSION["loggedIn"]) {
+			$email = $currentUserRecord["accountEmail"];
+		}
 
 		if (strlen($name) > 255) {
 			form_error("Ticket name too long!");
@@ -27,7 +31,15 @@
 			$stmt = $db->prepare("INSERT INTO `" . DB_PREF . "tickets` (`ticketName`, `ticketDesc`, `ticketEmail`, `ticketAttachments`) VALUES (:ticketName, :ticketDesc, :ticketEmail, :ticketAttachments)");
 			$stmt->execute(array(':ticketName' => $name, ':ticketDesc' => $desc, ':ticketEmail' => $email, ':ticketAttachments' => $attachments));
 
-			redirect("ticketSuccess.php?number=" . $db->lastInsertId());
+			$ticketId = $db->lastInsertId();
+
+			$actStmt = $db->prepare("INSERT INTO `" . DB_PREF . "ticketActions` (`actionType`, `actionTicket`) VALUES ('created', :ticketId)");
+			$actStmt->execute(array(':ticketId' => $ticketId));
+			
+			$act2Stmt = $db->prepare("INSERT INTO `" . DB_PREF . "ticketActions` (`actionType`, `actionDetails`, `actionTicket`) VALUES ('wrote', :ticketDesc, :ticketId)");
+			$act2Stmt->execute(array(':ticketDesc' => $desc, ':ticketId' => $ticketId));
+
+			redirect("ticketSuccess.php?number=" . $ticketId);
 			die();
 		}
 	}

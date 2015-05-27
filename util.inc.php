@@ -83,6 +83,26 @@ function getUserRecordFromId($id) {
 	}
 	return $results[0];
 }
+function getTicket($id) {
+	global $db;
+	$chkStmt = $db->prepare("SELECT * FROM `" . DB_PREF . "tickets` WHERE ticketNumber=:id");
+	$chkStmt->execute(array(":id" => $id));
+	$results = $chkStmt->fetchAll(PDO::FETCH_ASSOC);
+	if (count($results) == 0) {
+		return array();
+	}
+	return $results[0];
+}
+function getTicketActions($id) {
+	global $db;
+	$chkStmt = $db->prepare("SELECT * FROM `" . DB_PREF . "ticketActions` WHERE actionTicket=:id");
+	$chkStmt->execute(array(":id" => $id));
+	$results = $chkStmt->fetchAll(PDO::FETCH_ASSOC);
+	if (count($results) == 0) {
+		return array();
+	}
+	return $results;
+}
 
 $currentUserRecord = array();
 if ($_SESSION["loggedIn"]) {
