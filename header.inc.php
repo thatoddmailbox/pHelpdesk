@@ -24,6 +24,7 @@
 		<link rel="stylesheet" href="<?php echo SITE_URL; ?>css/dropzone.css" />
 
 		<script src="<?php echo SITE_URL; ?>js/jquery-1.11.2.min.js"></script>
+		<script src="<?php echo SITE_URL; ?>js/jquery.timeago.js"></script>
 		<script src="<?php echo SITE_URL; ?>js/bootstrap.min.js"></script>
 		<script src="<?php echo SITE_URL; ?>js/tinymce/tinymce.min.js"></script>
 		<script src="<?php echo SITE_URL; ?>js/dropzone.js"></script>
@@ -42,6 +43,7 @@
 				$(".dropzone-activate").each(function() {
 					$(this).dropzone({ url: $(this).attr("data-action") });
 				});
+				$("abbr.timeago").timeago();
 			});
 		</script>
 

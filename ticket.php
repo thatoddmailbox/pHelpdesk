@@ -19,6 +19,7 @@ $ticketActions = getTicketActions($ticketNumber);
 				if (intval($action["actionUser"]) == false || $action["actionUser"] == "-1") {
 					$accountName = "Anonymous User";
 				}
+
 				$user = "<strong>" . $accountName . "</strong>";
 				switch($action["actionType"]) {
 					case "created":
@@ -39,7 +40,10 @@ $ticketActions = getTicketActions($ticketNumber);
 				}
 			?>
 			<div<?php echo ($action["actionDetails"] != "" ? ' class="wroteHeader"' : ''); ?>>
-			<?php echo $name; ?>
+				<?php echo $name; ?>
+				<div class="pull-right date">
+					<abbr class="timeago" title="<?php echo date("c", strtotime($action["actionTimestamp"])); ?>"><?php echo $action["actionTimestamp"]; ?></abbr>
+				</div>
 			</div>
 			<?php if ($action["actionDetails"] != "") {
 				echo $action["actionDetails"];
@@ -63,6 +67,9 @@ $ticketActions = getTicketActions($ticketNumber);
 	border-bottom: solid 1px black;
 	margin-bottom: 7px;
 	padding-bottom: 7px;
+}
+.date {
+	color: #AAA;
 }
 </style>
 <?php require("footer.inc.php"); ?>
