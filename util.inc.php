@@ -85,6 +85,7 @@ function getUserRecordFromId($id) {
 }
 function getTicket($id) {
 	global $db;
+	$db->query("set time_zone = '+00:00';");
 	$chkStmt = $db->prepare("SELECT * FROM `" . DB_PREF . "tickets` WHERE ticketNumber=:id");
 	$chkStmt->execute(array(":id" => $id));
 	$results = $chkStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -95,6 +96,7 @@ function getTicket($id) {
 }
 function getTicketActions($id) {
 	global $db;
+	$db->query("set time_zone = '+00:00';");
 	$chkStmt = $db->prepare("SELECT * FROM `" . DB_PREF . "ticketActions` WHERE actionTicket=:id");
 	$chkStmt->execute(array(":id" => $id));
 	$results = $chkStmt->fetchAll(PDO::FETCH_ASSOC);
