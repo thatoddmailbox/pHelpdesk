@@ -107,7 +107,7 @@ function getTicketActions($id) {
 }
 
 $currentUserRecord = array();
-if ($_SESSION["loggedIn"]) {
+if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
 	$currentUserRecord = getUserRecord($_SESSION["username"]);
 }
 
