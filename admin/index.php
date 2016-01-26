@@ -6,7 +6,7 @@
 	<ul>
 		<li><a href="<?php echo SITE_URL; ?>admin/users.php">User management</a></li>
 		<li><a href="<?php echo SITE_URL; ?>admin/ticketAssignment.php">Ticket assignment</a></li>
-		<li><a href="<?php echo SITE_URL; ?>admin/knolConfig.php">Knowldegebase configuration</a></li>
+		<li><a href="<?php echo SITE_URL; ?>admin/kbConfig.php">Knowldegebase configuration</a></li>
 		<li><a href="<?php echo SITE_URL; ?>admin/siteAppearance.php">Site appearance</a></li>
 		<li><a href="<?php echo SITE_URL; ?>admin/siteConfig.php">Site configuration</a></li>
 	</ul>

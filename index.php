@@ -15,7 +15,7 @@
 		<div class="col-md-6 knowledgebase">
 			<h3>View the knowledgebase</h3>
 			<p>Need to find some information? Use our comprehensive knowledgebase! Find articles describing your problem and how to fix it.</p>
-			<a href="<?php echo SITE_URL; ?>knol/" class="btn btn-primary btn-lg">View knowledgebase</a>
+			<a href="<?php echo SITE_URL; ?>kb/" class="btn btn-primary btn-lg">View knowledgebase</a>
 		</div>
 	</div>
 </div>
