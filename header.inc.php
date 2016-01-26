@@ -22,6 +22,7 @@
 
 		<link rel="stylesheet" href="<?php echo SITE_URL; ?>css/bootstrap.min.css" />
 		<link rel="stylesheet" href="<?php echo SITE_URL; ?>css/dropzone.css" />
+		<link rel="stylesheet" href="<?php echo SITE_URL; ?>css/main.css" />
 
 		<script src="<?php echo SITE_URL; ?>js/jquery-1.11.2.min.js"></script>
 		<script src="<?php echo SITE_URL; ?>js/jquery.timeago.js"></script>

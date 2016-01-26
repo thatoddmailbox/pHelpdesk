@@ -48,7 +48,7 @@
 					echo "</td>";
 
 					echo "<td>";
-					echo '<a href="' . SITE_URL . 'agent/viewTicket.php?id=' . $entry["ticketNumber"] . '" class="btn btn-primary btn-xs">View</a>';
+					echo '<a href="' . SITE_URL . 'ticket.php?number=' . $entry["ticketNumber"] . '" class="btn btn-primary btn-xs">View</a>';
 					echo "</td>";
 
 					echo "</tr>";
