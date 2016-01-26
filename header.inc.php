@@ -3,7 +3,7 @@
 	require_once("db.inc.php");
 
 	session_start();
-	
+
 	require_once("util.inc.php");
 
 	$currentLevel = "user";
@@ -93,7 +93,7 @@
 						<button type="submit" class="btn btn-default">Submit</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<?php if ($_SESSION["loggedIn"] && $currentUserRecord["accountLevel"] != "user") { ?>
+						<?php if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] && $currentUserRecord["accountLevel"] != "user") { ?>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 									Switch view
@@ -114,7 +114,7 @@
 						<?php } ?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								<?php if ($_SESSION["loggedIn"]) {
+								<?php if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
 									echo htmlentities($currentUserRecord["accountName"]);
 								} else { ?>
 									Log in/create account
@@ -122,7 +122,7 @@
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu" role="menu">
-								<?php if ($_SESSION["loggedIn"]) { ?>
+								<?php if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) { ?>
 									<li><a href="<?php echo SITE_URL; ?>profile.php">Profile</a></li>
 									<li><a href="<?php echo SITE_URL; ?>myTickets.php">My tickets</a></li>
 									<li class="divider"></li>
