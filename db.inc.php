@@ -1,7 +1,7 @@
 <?php
 define("DB_HOST", "localhost");
-define("DB_USER", "root");
-define("DB_PASS", "root");
+define("DB_USER", "pHelpdesk");
+define("DB_PASS", "pHelpdesk");
 define("DB_BASE", "pHelpdesk");
 define("DB_PREF", "pHelpdesk_");
 
