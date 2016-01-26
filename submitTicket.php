@@ -37,10 +37,10 @@
 			if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
 				$userId = $currentUserRecord["accountId"];
 			}
-			$actStmt = $db->prepare("INSERT INTO `" . DB_PREF . "ticketActions` (`actionType`, `actionTicket`, `actionUser`, `actionTimestamp`) VALUES ('created', :ticketId, :actionUser, UTC_TIMESTAMP())");
+			$actStmt = $db->prepare("INSERT INTO `" . DB_PREF . "ticketActions` (`actionType`, `actionTicket`, `actionUser`, `actionTimestamp`) VALUES ('created', :ticketId, :actionUser, NOW())");
 			$actStmt->execute(array(':ticketId' => $ticketId, ':actionUser' => $userId));
 
-			$act2Stmt = $db->prepare("INSERT INTO `" . DB_PREF . "ticketActions` (`actionType`, `actionDetails`, `actionTicket`, `actionUser`, `actionTimestamp`) VALUES ('wrote', :ticketDesc, :ticketId, :actionUser, UTC_TIMESTAMP())");
+			$act2Stmt = $db->prepare("INSERT INTO `" . DB_PREF . "ticketActions` (`actionType`, `actionDetails`, `actionTicket`, `actionUser`, `actionTimestamp`) VALUES ('wrote', :ticketDesc, :ticketId, :actionUser, NOW())");
 			$act2Stmt->execute(array(':ticketDesc' => $desc, ':ticketId' => $ticketId, ':actionUser' => $userId));
 
 			redirect("ticketSuccess.php?number=" . $ticketId);
