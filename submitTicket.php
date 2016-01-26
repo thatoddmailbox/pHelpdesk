@@ -7,7 +7,7 @@
 		if (isPostValEmpty("ticketDesc")) {
 			form_error("Please enter a ticket description.");
 		}
-		if ((isPostValEmpty("email") || !filter_var(postVal("email"), FILTER_VALIDATE_EMAIL)) && !$_SESSION["loggedIn"]) {
+		if ((isPostValEmpty("email") || !filter_var(postVal("email"), FILTER_VALIDATE_EMAIL)) && (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"])) {
 			form_error("Please enter a valid email address.");
 		}
 
@@ -16,7 +16,7 @@
 		$email = postVal("email");
 		$attachments = "";
 
-		if (!$isError && $_SESSION["loggedIn"]) {
+		if (!$isError && isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
 			$email = $currentUserRecord["accountEmail"];
 		}
 
@@ -33,11 +33,15 @@
 
 			$ticketId = $db->lastInsertId();
 
-			$actStmt = $db->prepare("INSERT INTO `" . DB_PREF . "ticketActions` (`actionType`, `actionTicket`) VALUES ('created', :ticketId)");
-			$actStmt->execute(array(':ticketId' => $ticketId));
-			
-			$act2Stmt = $db->prepare("INSERT INTO `" . DB_PREF . "ticketActions` (`actionType`, `actionDetails`, `actionTicket`) VALUES ('wrote', :ticketDesc, :ticketId)");
-			$act2Stmt->execute(array(':ticketDesc' => $desc, ':ticketId' => $ticketId));
+			$userId = -1;
+			if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
+				$userId = $currentUserRecord["accountId"];
+			}
+			$actStmt = $db->prepare("INSERT INTO `" . DB_PREF . "ticketActions` (`actionType`, `actionTicket`, `actionUser`, `actionTimestamp`) VALUES ('created', :ticketId, :actionUser, UTC_TIMESTAMP())");
+			$actStmt->execute(array(':ticketId' => $ticketId, ':actionUser' => $userId));
+
+			$act2Stmt = $db->prepare("INSERT INTO `" . DB_PREF . "ticketActions` (`actionType`, `actionDetails`, `actionTicket`, `actionUser`, `actionTimestamp`) VALUES ('wrote', :ticketDesc, :ticketId, :actionUser, UTC_TIMESTAMP())");
+			$act2Stmt->execute(array(':ticketDesc' => $desc, ':ticketId' => $ticketId, ':actionUser' => $userId));
 
 			redirect("ticketSuccess.php?number=" . $ticketId);
 			die();
@@ -63,7 +67,7 @@
 		<h4>Images</h4>
 		<p>Upload screenshots or other images describing the problem you're experiencing.</p>
 		<div class="dropzone dropzone-activate" data-action="<?php echo SITE_URL; ?>uploadHandler.php">
-			
+
 		</div>
 
 		<br />

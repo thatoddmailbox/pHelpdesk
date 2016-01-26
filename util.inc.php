@@ -13,10 +13,10 @@ function isEmpty($formField) {
 	return !isset($formField) || empty($formField);
 }
 function isGetValEmpty($key) {
-	return isEmpty($_GET[$key]);
+	return !isset($_GET[$key]) || isEmpty($_GET[$key]);
 }
 function isPostValEmpty($key) {
-	return isEmpty($_POST[$key]);
+	return !isset($_POST[$key]) || isEmpty($_POST[$key]); // extra isset to avoid warning
 }
 
 function getVal($key)

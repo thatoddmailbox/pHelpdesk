@@ -8,6 +8,7 @@ if (isGetValEmpty("number")) {
 $ticketNumber = intval(getVal("number"));
 $ticket = getTicket($ticketNumber);
 $ticketActions = getTicketActions($ticketNumber);
+date_default_timezone_set("GMT0"); // timezones.
 ?>
 <div class="container">
 	<h1><?php echo htmlspecialchars($ticket["ticketName"]); ?></h1>
@@ -15,9 +16,9 @@ $ticketActions = getTicketActions($ticketNumber);
 		<div class="action<?php echo ($action["actionDetails"] != "" ? ' wrote' : '');?>">
 			<?php
 				$usrRecord = getUserRecordFromId(intval($action["actionUser"]));
-				$accountName = $usrRecord["accountName"];
-				if (intval($action["actionUser"]) == false || $action["actionUser"] == "-1") {
-					$accountName = "Anonymous User";
+				$accountName = "Anonymous User";
+				if (intval($action["actionUser"]) != false && $action["actionUser"] != "-1") {
+					$accountName = $usrRecord["accountName"];
 				}
 
 				$user = "<strong>" . $accountName . "</strong>";

@@ -8,7 +8,7 @@ if (isGetValEmpty("number")) {
 ?>
 <div class="container">
 	<h1>Ticket submitted!</h1>
-	<p>Thanks for submitting a ticket! Your ticket is number <strong><?php echo htmlentities(getVal("number")); ?></strong>.</p>
+	<p>Thanks for submitting a ticket! Your ticket number is #<strong><?php echo htmlentities(getVal("number")); ?></strong>. To view information about it, see <a href="ticket.php?number=<?php echo htmlentities(getVal("number")); ?>">this page</a>.</p>
 	<?php if (EMAIL_ENABLED) { ?>
 		<p>You should receive a confirmation email soon. Once we've replied, you'll get an email alerting you.</p>
 	<?php } ?>

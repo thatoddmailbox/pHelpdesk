@@ -2,7 +2,9 @@
 require_once("config.inc.php");
 require_once("db.inc.php");
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+	session_start();
+}
 
 require_once("util.inc.php");
 
